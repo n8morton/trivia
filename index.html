@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,15 +8,16 @@
     <title>Document</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
+
 <body>
-    <div id="time-div">
-        
-    </div>
     
+
+    </div>
+
     <div id="question">
 
     </div>
-    
+
     <div id="choices">
 
     </div>
@@ -24,81 +26,174 @@
         Start Game
     </button>
 
+    <div id="score">
+        Score:0
+    </div>
+
+    <div id="time-div"></div>
+
     <script>
-    
-    var buttonA=$("<button id=button-a class=buttons>");
-    var buttonB=$("<button id=button-b class=buttons>");
-    var buttonC=$("<button id=button-c class=buttons>");
-    var buttonD=$("<button id=button-d class=buttons>");
-    var question1 ="What is 1 + 1?"
-    var answer1 = {
+
+        var buttonA = $("<button id=button-a class=buttons>");
+        var buttonB = $("<button id=button-b class=buttons>");
+        var buttonC = $("<button id=button-c class=buttons>");
+        var buttonD = $("<button id=button-d class=buttons>");
+        var questions = ["What is 1 + 1?", "What is 2 + 2?", "What is 3 + 3?"];
+        var answers = [{
             "a": {
                 "isCorrect": false,
                 "answer": 1,
             },
-            "b":  {
+            "b": {
                 "isCorrect": true,
                 "answer": 2,
             },
-            "c":  {
+            "c": {
                 "isCorrect": false,
                 "answer": 3,
             },
-            "d":  {
+            "d": {
                 "isCorrect": false,
                 "answer": 4,
             },
-        }   
-    
-    var gameTimer;
-    var timeLeft=15;
+        },
 
-    $("#choices").append(buttonA, buttonB, buttonC, buttonD).hide();
+        {
+            "a": {
+                "isCorrect": true,
+                "answer": 4,
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": 5,
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": 6,
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": 7,
+            },
+        },
 
-    
-    document.getElementById("start").onclick=function(){
-        gameTimer=setInterval(timer,1000);
-        $("#start").hide();
-        $("#choices").show();
-        // function
-        $("#question").text(question1);
-        $("#button-a").text(answer1["a"]["answer"]).attr("data-answr",answer1["a"]["isCorrect"]);
-        $("#button-b").text(answer1["b"]["answer"]).attr("data-answr",answer1["b"]["isCorrect"]);
-        $("#button-c").text(answer1["c"]["answer"]).attr("data-answr",answer1["c"]["isCorrect"]);
-        $("#button-d").text(answer1["d"]["answer"]).attr("data-answr",answer1["d"]["isCorrect"]);
+        {
+            "a": {
+                "isCorrect": false,
+                "answer": 2,
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": 4,
+            },
+            "c": {
+                "isCorrect": true,
+                "answer": 6,
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": 8,
+            },
+        },
 
-        $(".buttons").click(function() {
-            if($(this).attr("data-answr")=="true"){
-                console.log("Correct!");
-            }else{
-                console.log("Incorrect");
+
+        ]
+
+        var gameTimer;
+        var timeLeft=10;
+        var qNum=0;
+        var aNum=0;
+        var score=0;
+
+
+
+        // set functions
+        function setQuestion() {
+
+            $("#question").text(questions[qNum]);
+            $("#button-a").text(answers[aNum]["a"]["answer"]).attr("data-answr", answers[aNum]["a"]["isCorrect"]);
+            $("#button-b").text(answers[aNum]["b"]["answer"]).attr("data-answr", answers[aNum]["b"]["isCorrect"]);
+            $("#button-c").text(answers[aNum]["c"]["answer"]).attr("data-answr", answers[aNum]["c"]["isCorrect"]);
+            $("#button-d").text(answers[aNum]["d"]["answer"]).attr("data-answr", answers[aNum]["d"]["isCorrect"]);
+            qNum++;
+            aNum++;
+        }
+
+        function timer() {
+            document.getElementById("time-div").innerHTML = timeLeft;
+            if (timeLeft == 0) {
+                $("#question").text("Time Up!!");
+                clearInterval(gameTimer);
+                timeLeft = 10;
+                document.getElementById("time-div").innerHTML = timeLeft;
+                $("#time-div").hide();
+                $("#start").text("Next Question").show();
             }
-            console.log($(this).attr("data-answr"));
-        });
+            timeLeft--
+        }
+
+
+        $("#choices").append(buttonA, buttonB, buttonC, buttonD).hide();
+
+
+        document.getElementById("start").onclick = function () {
+            gameTimer = setInterval(timer, 1000);
+            $("#time-div").show();
+            $("#start").hide();
+            $("#choices").show();
+
+
+            setQuestion();
+            
+            // for some reason this funtcion runs and additional time each tiime a querstion is answered.
+            // ie. on first question it runs the function once, on second question it runs it twice and
+            // on third question it runs it three times. It does this regardless of weather or not you 
+            //answer correct of not as far as i can tell.. I only have it set up with three questions so far
+            // I cannot figure out why it keeps running it more and more times with each passing question
+            //but the console logs confirm it...
+
+            $(".buttons").click(function () {
+                $("#choices").hide();
+                if ($(this).attr("data-answr") == "true") {
+                    $("#question").text("Correct!");
+                    clearInterval(gameTimer);
+                    timeLeft = 10;
+                    document.getElementById("time-div").innerHTML = timeLeft;
+                    $("#time-div").hide();
+                    score=(score+10);
+                    $("#score").text("Score:"+score);
+                    console.log(score);
+                    console.log(($(this).attr("data-answr")));
+                } else {
+                    $("#question").text("Incorrect...");
+                    clearInterval(gameTimer);
+                    timeLeft = 10;
+                    document.getElementById("time-div").innerHTML = timeLeft;
+                    $("#time-div").hide();
+                    if(score>4){
+                        score=(score-5);
+                        
+                    }    
+                    console.log(score);
+                    $("#score").text("Score:"+score);
+                    
+                }
+
+                $("#start").text("Next Question").show();
+
+
+
+            });
+
+
+
+        }
+
+        $(".button").click()
 
         
-        }
 
-    $(".button").click()
-    
-    
-    function timer(){
-        document.getElementById("time-div").innerHTML=timeLeft;
-        if(timeLeft==0){
-            clearInterval(gameTimer)
-        }
-        timeLeft--
-    }
-
-    
-
-    
-    
-
-
-    
     </script>
 
-    
 </body>
 </html>
