@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <div id="time-div">
+        
+    </div>
+    
+    <div id="question">
+
+    </div>
+    
+    <div id="choices">
+
+    </div>
+
+    <button id="start">
+        Start Game
+    </button>
+
+    <script>
+    
+    var buttonA=$("<button id=button-a class=buttons>");
+    var buttonB=$("<button id=button-b class=buttons>");
+    var buttonC=$("<button id=button-c class=buttons>");
+    var buttonD=$("<button id=button-d class=buttons>");
+    var question1 ="What is 1 + 1?"
+    var answer1 = {
+            "a": {
+                "isCorrect": false,
+                "answer": 1,
+            },
+            "b":  {
+                "isCorrect": true,
+                "answer": 2,
+            },
+            "c":  {
+                "isCorrect": false,
+                "answer": 3,
+            },
+            "d":  {
+                "isCorrect": false,
+                "answer": 4,
+            },
+        }   
+    
+    var gameTimer;
+    var timeLeft=15;
+
+    $("#choices").append(buttonA, buttonB, buttonC, buttonD).hide();
+
+    
+    document.getElementById("start").onclick=function(){
+        gameTimer=setInterval(timer,1000);
+        $("#start").hide();
+        $("#choices").show();
+        // function
+        $("#question").text(question1);
+        $("#button-a").text(answer1["a"]["answer"]).attr("data-answr",answer1["a"]["isCorrect"]);
+        $("#button-b").text(answer1["b"]["answer"]).attr("data-answr",answer1["b"]["isCorrect"]);
+        $("#button-c").text(answer1["c"]["answer"]).attr("data-answr",answer1["c"]["isCorrect"]);
+        $("#button-d").text(answer1["d"]["answer"]).attr("data-answr",answer1["d"]["isCorrect"]);
+
+        $(".buttons").click(function() {
+            if($(this).attr("data-answr")=="true"){
+                console.log("Correct!");
+            }else{
+                console.log("Incorrect");
+            }
+            console.log($(this).attr("data-answr"));
+        });
+
+        
+        }
+
+    $(".button").click()
+    
+    
+    function timer(){
+        document.getElementById("time-div").innerHTML=timeLeft;
+        if(timeLeft==0){
+            clearInterval(gameTimer)
+        }
+        timeLeft--
+    }
+
+    
+
+    
+    
+
+
+    
+    </script>
+
+    
+</body>
+</html>
