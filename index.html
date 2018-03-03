@@ -6,194 +6,449 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
-    
+
 
     </div>
 
-    <div id="question">
+    <div class="container-fluid">
+        <div class=row>
+            <div class="col-md-3"></div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div id="question-header" class="card-header">
+                        Science Fiction Movie Quiz
+                    </div>
+                    <div class="card-body">
+                        <h5 id="question" class="card-title">"Click Button to Start! Good Luck!"</h5>
+                        <p class="card-text"></p>
+                        <span id="time-div"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=row>
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div id="player-name"class="card-header">
+                        Player:
+                    </div>
+                    <div class="card-body">
+                        <div id="choices">
+
+                        </div>
+
+                        <button id="start" class="btn btn-primary">
+                            Start!
+                        </button>
+
+                        <div id="score">
+                            Score:0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <div id="choices">
 
-    </div>
 
-    <button id="start">
-        Start Game
-    </button>
 
-    <div id="score">
-        Score:0
-    </div>
-
-    <div id="time-div"></div>
 
     <script>
 
-        var buttonA = $("<button id=button-a class=buttons>");
-        var buttonB = $("<button id=button-b class=buttons>");
-        var buttonC = $("<button id=button-c class=buttons>");
-        var buttonD = $("<button id=button-d class=buttons>");
-        var questions = ["What is 1 + 1?", "What is 2 + 2?", "What is 3 + 3?"];
-        var answers = [{
+        var buttonA = $("<button id=button-a class='buttons btn btn-primary'>");
+        var buttonB = $("<button id=button-b class='buttons btn btn-primary'>");
+        var buttonC = $("<button id=button-c class='buttons btn btn-primary'>");
+        var buttonD = $("<button id=button-d class='buttons btn btn-primary'>");
+
+        var questions = [{
+            "q": {
+                "question": "What character does Felicity Jones play in the 'Star Wars' film series ",
+            },
             "a": {
-                "isCorrect": false,
-                "answer": 1,
+                "isCorrect": true,
+                "answer": "Jyn Erso",
             },
             "b": {
-                "isCorrect": true,
-                "answer": 2,
+                "isCorrect": false,
+                "answer": "Rey",
             },
             "c": {
                 "isCorrect": false,
-                "answer": 3,
+                "answer": "Padme Amidala",
             },
             "d": {
                 "isCorrect": false,
-                "answer": 4,
+                "answer": "Leah Organa",
+            },
+        },
+
+
+
+        {
+            "q": {
+                "question": "'Bruce Willis' and 'Brad Pitt' star in what 1995 Terry Gillam science fiction film",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "Jupiter Ascending",
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": "Time Bandits",
+            },
+            "c": {
+                "isCorrect": true,
+                "answer": "12 Monkeys",
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": "The Zero Theorem",
+            },
+        },
+
+
+        {
+            "q": {
+                "question": "'Rick Deckard' is a character associated with which film that was directed by Ridley Scott?",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "Alien",
+            },
+            "b": {
+                "isCorrect": true,
+                "answer": "Blade Runner",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "Prometheus",
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": "Legend",
+            },
+        },
+        {
+            "q": {
+                "question": "'Jane Fonda' travels 41st-century space with her blind guardian angel 'Pygar' in what 1968 science fiction film? ",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "Voyage to the Planet of Prehistoric Women",
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": "Countdown",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "Tuhnderbird 6",
+            },
+            "d": {
+                "isCorrect": true,
+                "answer": "Barbarella",
+            },
+        },
+
+
+
+        {
+            "q": {
+                "question": "Select the correct subtitle to the 1984 film 'Star Trek III'",
+            },
+            "a": {
+                "isCorrect": true,
+                "answer": "The Search for Spock",
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": "Wrath of Khan",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "The Final Frontier",
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": "The Voyage Home",
             },
         },
 
         {
+            "q": {
+                "question": "What is the name of Malcolm McDowell's character in the 1971 film 'A Clockwork Orange'?",
+            },
             "a": {
                 "isCorrect": true,
-                "answer": 4,
+                "answer": "Alex DeLarge",
             },
             "b": {
                 "isCorrect": false,
-                "answer": 5,
+                "answer": "Steven DeLarge",
             },
             "c": {
                 "isCorrect": false,
-                "answer": 6,
+                "answer": "Thomas DeLarge",
             },
             "d": {
                 "isCorrect": false,
-                "answer": 7,
+                "answer": "Daniel DeLarge",
+            },
+        },
+        {
+            "q": {
+                "question": "Who played the role of 'The Fly' (1986)",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "Michael Keaton",
+            },
+            "b": {
+                "isCorrect": true,
+                "answer": "Jeff Goldblum",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "Sam Neill",
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": "Richard Attenborough",
             },
         },
 
         {
+            "q": {
+                "question": "With which classic science fiction film would you associate the quote 'Game over, man. Game over!'?",
+            },
             "a": {
                 "isCorrect": false,
-                "answer": 2,
+                "answer": "Predator",
             },
             "b": {
                 "isCorrect": false,
-                "answer": 4,
+                "answer": "The Thing",
             },
             "c": {
-                "isCorrect": true,
-                "answer": 6,
+                "isCorrect": false,
+                "answer": "Close Encounters of the Third Kind",
             },
             "d": {
-                "isCorrect": false,
-                "answer": 8,
+                "isCorrect": true,
+                "answer": "Alien",
             },
         },
 
+
+        {
+            "q": {
+                "question": "Genetically perfect DNA is the subject of which science fiction film? ",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "THX 1138",
+            },
+            "b": {
+                "isCorrect": false,
+                "answer": "Equilibrium",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "The Final Cut",
+            },
+            "d": {
+                "isCorrect": true,
+                "answer": "Gattaca",
+            },
+        },
+
+        {
+            "q": {
+                "question": "Who played the role of the game show host Damon Killian in Stephen King's film 'The Running Man'",
+            },
+            "a": {
+                "isCorrect": false,
+                "answer": "Dweezil Zappa",
+            },
+            "b": {
+                "isCorrect": true,
+                "answer": "Richard Dawson",
+            },
+            "c": {
+                "isCorrect": false,
+                "answer": "Jesse Ventura",
+            },
+            "d": {
+                "isCorrect": false,
+                "answer": "Mick Fleetwood",
+            },
+        },
 
         ]
 
+
         var gameTimer;
-        var timeLeft=10;
-        var qNum=0;
-        var aNum=0;
-        var score=0;
+        var timeLeft = 10;
+        var qNum = 0;
+        var score = 0;
+        var numCorrect = 0;
+        var gameOver = false;
+        var correctAnswer;
+        var playerName;
 
 
 
         // set functions
+        function getPlayerName() {
+            playerName = prompt("Please enter your name", "Guy Incognito");
+        }
+        
         function setQuestion() {
-
-            $("#question").text(questions[qNum]);
-            $("#button-a").text(answers[aNum]["a"]["answer"]).attr("data-answr", answers[aNum]["a"]["isCorrect"]);
-            $("#button-b").text(answers[aNum]["b"]["answer"]).attr("data-answr", answers[aNum]["b"]["isCorrect"]);
-            $("#button-c").text(answers[aNum]["c"]["answer"]).attr("data-answr", answers[aNum]["c"]["isCorrect"]);
-            $("#button-d").text(answers[aNum]["d"]["answer"]).attr("data-answr", answers[aNum]["d"]["isCorrect"]);
+            $("#question-header").text("Question#"+(qNum+1));
+            $("#question").text(questions[qNum]["q"]["question"]);
+            $("#button-a").text(questions[qNum]["a"]["answer"]).attr("data-answr", questions[qNum]["a"]["isCorrect"]);
+            $("#button-b").text(questions[qNum]["b"]["answer"]).attr("data-answr", questions[qNum]["b"]["isCorrect"]);
+            $("#button-c").text(questions[qNum]["c"]["answer"]).attr("data-answr", questions[qNum]["c"]["isCorrect"]);
+            $("#button-d").text(questions[qNum]["d"]["answer"]).attr("data-answr", questions[qNum]["d"]["isCorrect"]);
+            
+            // for(i=1;1<5;i++){
+                if(questions[qNum]["a"]["isCorrect"]==true){
+                    correctAnswer=questions[qNum]["a"]["answer"];
+                    console.log(correctAnswer);
+                }
+                if(questions[qNum]["b"]["isCorrect"]==true){
+                    correctAnswer=questions[qNum]["b"]["answer"];
+                    console.log(correctAnswer);
+                }
+                if(questions[qNum]["c"]["isCorrect"]==true){
+                    correctAnswer=questions[qNum]["c"]["answer"];
+                    console.log(correctAnswer);
+                }
+                if(questions[qNum]["d"]["isCorrect"]==true){
+                    correctAnswer=questions[qNum]["d"]["answer"];
+                    console.log(correctAnswer);
+                }
+            // }
             qNum++;
-            aNum++;
+
         }
 
         function timer() {
-            document.getElementById("time-div").innerHTML = timeLeft;
+            document.getElementById("time-div").innerHTML = "Question Time:"+timeLeft;
             if (timeLeft == 0) {
-                $("#question").text("Time Up!!");
+                $("#question").text("Time Up! The Correct Answer Was '"+correctAnswer+"'");
                 clearInterval(gameTimer);
                 timeLeft = 10;
                 document.getElementById("time-div").innerHTML = timeLeft;
                 $("#time-div").hide();
                 $("#start").text("Next Question").show();
+                $("#choices").hide();
             }
             timeLeft--
         }
 
+        function resetGame(){
+            gameOver=false;
+            qNum=0
+            numCorrect=0;
+            score=0;
+            $("#start").text("Start");
+            $("#question").text("Click Button to Start! Good Luck")
+        }
+
+
+        getPlayerName();
+        $("#player-name").text("Player: "+playerName)
 
         $("#choices").append(buttonA, buttonB, buttonC, buttonD).hide();
 
 
         document.getElementById("start").onclick = function () {
-            gameTimer = setInterval(timer, 1000);
-            $("#time-div").show();
-            $("#start").hide();
-            $("#choices").show();
+            if (gameOver == false) {
+                if (qNum < 10) {
+                    $("#time-div").text("Question Time:10").show();
+                    gameTimer = setInterval(timer, 1000);
+                    $("#start").hide();
+                    $("#choices").show();
 
+                    setQuestion();
 
-            setQuestion();
-            
-            // for some reason this funtcion runs and additional time each tiime a querstion is answered.
-            // ie. on first question it runs the function once, on second question it runs it twice and
-            // on third question it runs it three times. It does this regardless of weather or not you 
-            //answer correct of not as far as i can tell.. I only have it set up with three questions so far
-            // I cannot figure out why it keeps running it more and more times with each passing question
-            //but the console logs confirm it...
-
-            $(".buttons").click(function () {
-                $("#choices").hide();
-                if ($(this).attr("data-answr") == "true") {
-                    $("#question").text("Correct!");
-                    clearInterval(gameTimer);
-                    timeLeft = 10;
-                    document.getElementById("time-div").innerHTML = timeLeft;
-                    $("#time-div").hide();
-                    score=(score+10);
-                    $("#score").text("Score:"+score);
-                    console.log(score);
-                    console.log(($(this).attr("data-answr")));
                 } else {
-                    $("#question").text("Incorrect...");
-                    clearInterval(gameTimer);
-                    timeLeft = 10;
-                    document.getElementById("time-div").innerHTML = timeLeft;
-                    $("#time-div").hide();
-                    if(score>4){
-                        score=(score-5);
-                        
-                    }    
-                    console.log(score);
-                    $("#score").text("Score:"+score);
-                    
+                    $("#question").text("Great Job! You got " + numCorrect + " correct out of 10!");
+                    $("#question-header").text("Thanks for playing!");
+                    gameOver = true;
+                    $("#start").text("Play Again?");
+                };
+            } else {
+                resetGame();
+            }
+
+
+        };
+        $(".buttons").click(function () {
+            $("#choices").hide();
+            if ($(this).attr("data-answr") == "true") {
+                $("#question").text("Correct!");
+                clearInterval(gameTimer);
+                timeLeft = 10;
+                document.getElementById("time-div").innerHTML = timeLeft;
+                $("#time-div").hide();
+                score = (score + 10);
+                $("#score").text("Score:" + score);
+                numCorrect++;
+            } else {
+                $("#question").text("Incorrect...The Correct Answer Was '"+correctAnswer+"'");
+                clearInterval(gameTimer);
+                timeLeft = 10;
+                document.getElementById("time-div").innerHTML = timeLeft;
+                $("#time-div").hide();
+                if (score > 4) {
+                    score = (score - 5);
+                    $("#score").text("Score:" + score);
+
                 }
+            }
+
+            if (qNum < 10) {
 
                 $("#start").text("Next Question").show();
+            } else {
+                $("#start").text("Finish!").show();
+            }
 
 
 
-            });
+        });
 
 
 
-        }
+
 
         $(".button").click()
 
-        
+
 
     </script>
 
+    <!-- bootstrap js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 </body>
+
 </html>
